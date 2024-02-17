@@ -16,9 +16,9 @@ namespace DigitalVaccineRecord.Infrastructure.Entities
         public required double FromAge { get; set; }
         public required double ToAge { get; set; }
         public required int Number { get; set; }
-        //public required Guid VaccineId { get; set; }
+        public required Guid VaccineId { get; set; }
 
-        //[ForeignKey("VaccineId")]
+        [ForeignKey("VaccineId")]
         public virtual Vaccine Vaccine { get; set; }
     }
 }

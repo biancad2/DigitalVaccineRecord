@@ -4,17 +4,17 @@ using MediatR;
 
 namespace DigitalVaccineRecord.Api.Commands.Vaccine
 {
-    public class AddVaccineRequest : IRequest<VaccineModel>
+    public class AddVaccineCommand : IRequest<VaccineModel>
     {
         public EnumVaccineType Type { get; set; }
         public required string Name { get; set; }
         public required string Description { get; set; }
-        public required List<DoseModel> Doses { get; set; }
+        public List<DoseModel> Doses { get; set; }
     }
 
     public static class AddVaccineRequestExt
     {
-        public static VaccineModel ConvertRequestToVaccineModel(this AddVaccineRequest request)
+        public static VaccineModel ConvertRequestToVaccineModel(this AddVaccineCommand request)
         {
             var id = Guid.NewGuid();
 
@@ -29,8 +29,8 @@ namespace DigitalVaccineRecord.Api.Commands.Vaccine
             };
             foreach (var item in request.Doses)
             {
-                item.Vaccine = vaccine;
-                //item.VaccineId = id;
+                //item.Vaccine = vaccine;
+                item.VaccineId = id;
                 item.Id = Guid.NewGuid();
                 vaccine.Doses.Add(item);
             }

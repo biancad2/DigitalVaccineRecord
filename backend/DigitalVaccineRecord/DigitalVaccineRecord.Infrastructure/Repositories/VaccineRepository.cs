@@ -12,7 +12,7 @@ namespace DigitalVaccineRecord.Infrastructure.Repositories
     public class VaccineRepository : BaseRepository, IVaccineRepository
     {
 
-        public VaccineRepository(AppDbContext dbContext):base(dbContext) { }
+        public VaccineRepository(AppDbContext dbContext) : base(dbContext) { }
 
         public VaccineModel Get(Guid id)
         {
@@ -41,12 +41,15 @@ namespace DigitalVaccineRecord.Infrastructure.Repositories
 
         public async Task<IEnumerable<VaccineModel>> GetAllAsync()
         {
-            //using (var context = new AppDbContext(_contextOptions)) {
-                var vaccines = _dbContext.Vaccines.Include(v => v.Doses);
-                return _mapper.Map<List<VaccineModel>>(vaccines.ToList());
-            //}
-            //using var context = new AppDbContext(_contextOptions);
+            var vaccines = _dbContext.Vaccines.Include(v => v.Doses);
+            return _mapper.Map<List<VaccineModel>>(vaccines.ToList());
+        }
 
+        public VaccineModel GetByDose(Guid doseId)
+        {
+            var vaccine = _dbContext.Vaccines.Include(v => v.Doses)
+            .FirstOrDefault(v => v.Doses.Select(d => d.Id).Contains(doseId));
+            return _mapper.Map<VaccineModel>(vaccine);
         }
 
     }

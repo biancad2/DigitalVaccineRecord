@@ -16,8 +16,8 @@ namespace DigitalVaccineRecord.Infrastructure.Entities
         public string NurseSignature { get; set; }
 
         [ForeignKey("UserId")]
-        public virtual required User User { get; set; }
+        public virtual User User { get; set; }
         [ForeignKey("DoseId")]
-        public virtual required Dose Dose { get; set; }
+        public virtual Dose Dose { get; set; }
     }
 }

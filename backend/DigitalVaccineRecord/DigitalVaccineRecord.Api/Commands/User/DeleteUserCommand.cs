@@ -3,7 +3,8 @@ using MediatR;
 
 namespace DigitalVaccineRecord.Api.Commands.User
 {
-    public class GetAllUserRequest : IRequest<List<UserModel>>
+    public class DeleteUserCommand : IRequest<bool>
     {
+        public required Guid Id { get; set; }
     }
 }

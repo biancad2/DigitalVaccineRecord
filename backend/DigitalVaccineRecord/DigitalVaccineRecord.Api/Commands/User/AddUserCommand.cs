@@ -4,9 +4,8 @@ using MediatR;
 
 namespace DigitalVaccineRecord.Api.Commands.User
 {
-    public class UpdateUserRequest : IRequest<UserModel>
+    public class AddUserCommand : IRequest<UserModel>
     {
-        public required Guid Id { get; set; }
         public required String FirstName { get; set; }
         public required String Surname { get; set; }
         public required String Document { get; set; }
@@ -17,21 +16,21 @@ namespace DigitalVaccineRecord.Api.Commands.User
         public List<EnumProfile> Profiles { get; set; }
     }
 
-    public static class UpdateUserRequestExt
+    public static class AddUserCommandExt
     {
-        public static UserModel ConvertRequestToUserModel(this UpdateUserRequest request)
+        public static UserModel ConvertRequestToUserModel(this AddUserCommand request)
         {
             return new UserModel()
             {
-                Id = request.Id,
+                Id = Guid.NewGuid(),
                 Document = request.Document,
                 FirstName = request.FirstName,
                 Surname = request.Surname,
                 Gender = request.Gender,
                 NationalHealthCardNumber = request.NationalHealthCardNumber,
+                Profiles = request.Profiles,
                 BirthDate = request.BirthDate,
-                IsPregnant = request.IsPregnant,
-                Profiles = request.Profiles
+                IsPregnant = request.IsPregnant
             };
         }
     }

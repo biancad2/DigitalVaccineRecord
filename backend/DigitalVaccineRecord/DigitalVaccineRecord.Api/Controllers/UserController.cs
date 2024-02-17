@@ -23,7 +23,7 @@ namespace DigitalVaccineRecord.Api.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Get([FromQuery] GetAllUserRequest request)
+        public async Task<IActionResult> Get([FromQuery] GetAllUsersCommand request)
         {
             var response = await _mediator.Send(request);
             return Ok(response);
@@ -32,7 +32,7 @@ namespace DigitalVaccineRecord.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            var request = new GetUserRequest() { Id = id };
+            var request = new GetUserCommand() { Id = id };
             var response = await _mediator.Send(request);
             return Ok(response);
         }
@@ -40,14 +40,21 @@ namespace DigitalVaccineRecord.Api.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Post([FromBody]AddUserRequest request)
+        public async Task<IActionResult> Post([FromBody]AddUserCommand request)
         {
             await _mediator.Send(request);
             return Created();
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromQuery] UpdateUserRequest request)
+        public async Task<IActionResult> Put([FromQuery] UpdateUserCommand request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
+        [HttpPost("dose")]
+        public async Task<IActionResult> AddDose([FromBody] AddUserDoseCommand request)
         {
             var response = await _mediator.Send(request);
             return Ok(response);
@@ -56,7 +63,7 @@ namespace DigitalVaccineRecord.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
-            var request = new DeleteUserRequest() { Id = id };
+            var request = new DeleteUserCommand() { Id = id };
             var result = await _mediator.Send(request);
             return Ok(result);
         }

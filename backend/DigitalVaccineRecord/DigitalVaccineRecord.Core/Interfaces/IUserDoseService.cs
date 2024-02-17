@@ -8,9 +8,7 @@ using System.Threading.Tasks;
 
 namespace DigitalVaccineRecord.Core.Interfaces
 {
-    public interface IUserService :IService<UserModel>
+    public interface IUserDoseService :IService<UserModel>
     {
-        List<UserModel> GetUsers(EnumProfile? profile);
-        UserDoseModel AddUserDose(UserDoseModel userDose);
     }
 }

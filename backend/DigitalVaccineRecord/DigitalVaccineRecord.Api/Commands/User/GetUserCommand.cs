@@ -1,9 +1,9 @@
 ﻿using DigitalVaccineRecord.Core.Models;
 using MediatR;
 
-namespace DigitalVaccineRecord.Api.Commands.Vaccine
+namespace DigitalVaccineRecord.Api.Commands.User
 {
-    public class DeleteVaccineRequest : IRequest<bool>
+    public class GetUserCommand : IRequest<UserModel>
     {
         public required Guid Id { get; set; }
     }

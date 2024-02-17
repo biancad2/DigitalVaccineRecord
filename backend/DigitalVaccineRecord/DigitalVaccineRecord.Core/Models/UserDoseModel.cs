@@ -12,7 +12,9 @@ namespace DigitalVaccineRecord.Core.Models
         public Guid Id { get; set; }
         public Guid DoseId { get; set; }
         public Guid UserId { get; set; }
-        public virtual required UserModel User { get; set; }
-        public virtual required DoseModel Dose { get; set; }
+        public DateTime Date { get; set; }
+        public string NurseSignature { get; set; }
+        public UserModel User { get; set; }
+        public DoseModel Dose { get; set; }
     }
 }

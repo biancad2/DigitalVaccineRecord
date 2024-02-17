@@ -4,33 +4,34 @@ using MediatR;
 
 namespace DigitalVaccineRecord.Api.Commands.User
 {
-    public class AddUserRequest : IRequest<UserModel>
+    public class UpdateUserCommand : IRequest<UserModel>
     {
+        public required Guid Id { get; set; }
         public required String FirstName { get; set; }
         public required String Surname { get; set; }
         public required String Document { get; set; }
         public DateTime BirthDate { get; set; }
         public required String NationalHealthCardNumber { get; set; }
         public required EnumGender Gender { get; set; }
-        public bool IsPregnant => false;
+        public bool IsPregnant { get; set; }
         public List<EnumProfile> Profiles { get; set; }
     }
 
-    public static class AddUserRequestExt
+    public static class UpdateUserRequestExt
     {
-        public static UserModel ConvertRequestToUserModel(this AddUserRequest request)
+        public static UserModel ConvertRequestToUserModel(this UpdateUserCommand request)
         {
             return new UserModel()
             {
-                Id = Guid.NewGuid(),
+                Id = request.Id,
                 Document = request.Document,
                 FirstName = request.FirstName,
                 Surname = request.Surname,
                 Gender = request.Gender,
                 NationalHealthCardNumber = request.NationalHealthCardNumber,
-                Profiles = request.Profiles,
                 BirthDate = request.BirthDate,
-                IsPregnant = request.IsPregnant
+                IsPregnant = request.IsPregnant,
+                Profiles = request.Profiles
             };
         }
     }

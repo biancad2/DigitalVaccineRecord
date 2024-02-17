@@ -4,6 +4,7 @@ using DigitalVaccineRecord.Core.Interfaces;
 using DigitalVaccineRecord.Core.Models;
 using DigitalVaccineRecord.Infrastructure.Context;
 using DigitalVaccineRecord.Infrastructure.Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Data.Entity.Validation;
 
 namespace DigitalVaccineRecord.Infrastructure.Repositories
@@ -14,7 +15,10 @@ namespace DigitalVaccineRecord.Infrastructure.Repositories
 
         public UserModel Get(Guid id)
         {
-            var user = _dbContext.Find<User>(id);
+            var user = _dbContext.Users.Include(u => u.UserDoses)
+                        .ThenInclude(d => d.Dose)
+                        .ThenInclude(v => v.Vaccine)
+                        .FirstOrDefault(u => u.Id == id);
             return _mapper.Map<UserModel>(user);
         }
 
@@ -51,8 +55,12 @@ namespace DigitalVaccineRecord.Infrastructure.Repositories
         public async Task<IEnumerable<UserModel>> GetAllAsync()
         {
             return _mapper.Map<IEnumerable<UserModel>>(_dbContext.Users.ToList());
+        }        
+        
+        public void AddDose(UserDoseModel doseModel)
+        {
+            _dbContext.UserDoses.Add(_mapper.Map<UserDose>(doseModel));
+            _dbContext.SaveChanges();
         }
-
-
     }
 }

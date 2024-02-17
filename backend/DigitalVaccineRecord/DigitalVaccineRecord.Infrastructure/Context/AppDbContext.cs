@@ -27,5 +27,6 @@ namespace DigitalVaccineRecord.Infrastructure.Context
         public DbSet<User> Users { get; set; }
         public DbSet<Dose> Doses { get; set; }
         public DbSet<Vaccine> Vaccines { get; set; }
+        public DbSet<UserDose> UserDoses { get; set; }
     }
 }

@@ -41,6 +41,10 @@ namespace DigitalVaccineRecord.Core.Services
         public async Task<List<VaccineModel>> GetAllAsync()
         {
             var vaccines = await _vaccineRepository.GetAllAsync();
+            foreach(var vaccine in vaccines)
+            {
+                vaccine.Doses = vaccine.Doses.OrderBy(d => d.Number).ToList();
+            }
             return vaccines.ToList();
         }
     }

@@ -9,5 +9,6 @@ namespace DigitalVaccineRecord.Core.Interfaces
 {
     public interface IVaccineRepository : IRepository<VaccineModel>
     {
+        VaccineModel GetByDose(Guid doseId);
     }
 }

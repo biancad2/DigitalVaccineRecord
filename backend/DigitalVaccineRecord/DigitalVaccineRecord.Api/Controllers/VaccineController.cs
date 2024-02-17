@@ -22,7 +22,7 @@ namespace DigitalVaccineRecord.Api.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Get([FromQuery] GetAllVaccinesRequest request)
+        public IActionResult Get([FromQuery] GetAllVaccinesCommand request)
         {
             var response = _mediator.Send(request);
             return Ok(response);
@@ -31,7 +31,7 @@ namespace DigitalVaccineRecord.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            var request = new GetVaccineRequest() { Id = id };
+            var request = new GetVaccineCommand() { Id = id };
             var response = await _mediator.Send(request);
             return Ok(response);
         }
@@ -39,14 +39,14 @@ namespace DigitalVaccineRecord.Api.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Post([FromBody]AddVaccineRequest request)
+        public async Task<IActionResult> Post([FromBody]AddVaccineCommand request)
         {
             await _mediator.Send(request);
             return Created();
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromQuery] UpdateVaccineRequest request)
+        public async Task<IActionResult> Put([FromQuery] UpdateVaccineCommand request)
         {
             var response = await _mediator.Send(request);
             return Ok(response);
@@ -55,7 +55,7 @@ namespace DigitalVaccineRecord.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
-            var request = new DeleteUserRequest() { Id = id };
+            var request = new DeleteVaccineCommand() { Id = id };
             var result = await _mediator.Send(request);
             return Ok(result);
         }

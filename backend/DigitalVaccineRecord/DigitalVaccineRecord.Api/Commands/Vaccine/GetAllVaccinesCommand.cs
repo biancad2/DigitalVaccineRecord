@@ -3,7 +3,7 @@ using MediatR;
 
 namespace DigitalVaccineRecord.Api.Commands.Vaccine
 {
-    public class GetAllVaccinesRequest : IRequest<List<VaccineModel>>
+    public class GetAllVaccinesCommand : IRequest<List<VaccineModel>>
     {
     }
 }

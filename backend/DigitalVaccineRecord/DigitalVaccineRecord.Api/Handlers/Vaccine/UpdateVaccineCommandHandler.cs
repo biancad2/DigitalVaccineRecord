@@ -6,26 +6,26 @@ using MediatR;
 
 namespace DigitalVaccineRecord.Api.Handlers.Vaccine
 {
-    public class DeleteVaccineHandle : IRequestHandler<DeleteVaccineRequest, bool>
+    public class UpdateVaccineCommandHandler : IRequestHandler<UpdateVaccineCommand, VaccineModel>
     {
         private readonly IMediator _mediator;
         private readonly IVaccineService _VaccineService;
-        public DeleteVaccineHandle(IMediator mediator, IVaccineService service)
+        public UpdateVaccineCommandHandler(IMediator mediator, IVaccineService service)
         {
             this._mediator = mediator;
             this._VaccineService = service;
         }
 
-        public async Task<bool> Handle(DeleteVaccineRequest request, CancellationToken cancellationToken)
+        public async Task<VaccineModel> Handle(UpdateVaccineCommand request, CancellationToken cancellationToken)
         {
-            //var Vaccine = request.ConvertRequestToVaccineModel();
+            var Vaccine = request.ConvertRequestToVaccineModel();
             //try
             //{
-            _VaccineService.Delete(request.Id);
+            _VaccineService.Edit(Vaccine);
 
-            //await _mediator.Publish(new VaccineDeletedNotification(Vaccine));
+            //await _mediator.Publish(new VaccineUpdatedNotification(Vaccine));
 
-            return await Task.FromResult(true);
+            return await Task.FromResult(Vaccine);
             //}
             //catch (Exception ex)
             //{

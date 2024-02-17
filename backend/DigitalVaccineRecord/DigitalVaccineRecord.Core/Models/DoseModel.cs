@@ -15,7 +15,7 @@ namespace DigitalVaccineRecord.Core.Models
         public required double FromAge { get; set; }
         public required double ToAge { get; set; }
         public required int Number { get; set; }
-        //public required Guid VaccineId { get; set; }
-        public VaccineModel Vaccine { get; set; }
+        public Guid VaccineId { get; set; }
+        public VaccineModel? Vaccine { get; set; }
     }
 }

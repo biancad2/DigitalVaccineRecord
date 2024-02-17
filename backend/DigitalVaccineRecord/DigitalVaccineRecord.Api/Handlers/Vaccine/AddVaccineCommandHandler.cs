@@ -6,17 +6,17 @@ using MediatR;
 
 namespace DigitalVaccineRecord.Api.Handlers.Vaccine
 {
-    public class AddVaccineHandle : IRequestHandler<AddVaccineRequest, VaccineModel>
+    public class AddVaccineCommandHandler : IRequestHandler<AddVaccineCommand, VaccineModel>
     {
         private readonly IMediator _mediator;
         private readonly IVaccineService _vaccineService;
-        public AddVaccineHandle(IMediator mediator, IVaccineService service)
+        public AddVaccineCommandHandler(IMediator mediator, IVaccineService service)
         {
             this._mediator = mediator;
             this._vaccineService = service;
         }
 
-        public async Task<VaccineModel> Handle(AddVaccineRequest request, CancellationToken cancellationToken)
+        public async Task<VaccineModel> Handle(AddVaccineCommand request, CancellationToken cancellationToken)
         {
             var vaccine = request.ConvertRequestToVaccineModel();
             _vaccineService.Add(vaccine);

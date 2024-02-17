@@ -6,25 +6,26 @@ using MediatR;
 
 namespace DigitalVaccineRecord.Api.Handlers.User
 {
-    public class GetUserHandle : IRequestHandler<GetUserRequest, UserModel>
+    public class AddUserDoseCommandHandler : IRequestHandler<AddUserDoseCommand, UserDoseModel>
     {
         private readonly IMediator _mediator;
         private readonly IUserService _userService;
-        public GetUserHandle(IMediator mediator, IUserService service)
+        public AddUserDoseCommandHandler(IMediator mediator, IUserService service)
         {
             this._mediator = mediator;
             this._userService = service;
         }
 
-        public async Task<UserModel> Handle(GetUserRequest request, CancellationToken cancellationToken)
+        public async Task<UserDoseModel> Handle(AddUserDoseCommand request, CancellationToken cancellationToken)
         {
+            var dose = request.ConvertRequestToUserDoseModel();
             //try
             //{
-            var user = _userService.Get(request.Id);
+            _userService.AddUserDose(dose);
 
             //await _mediator.Publish(new UserCreatedNotification(user));
 
-            return await Task.FromResult(user);
+            return await Task.FromResult(dose);
             //}
             //catch (Exception ex)
             //{

@@ -3,10 +3,10 @@ using FluentValidation;
 
 namespace DigitalVaccineRecord.Api.Validations
 {
-    public class AddUserRequestValidator
-    : AbstractValidator<AddUserRequest>
+    public class AddUserCommandValidator
+    : AbstractValidator<AddUserCommand>
     {
-        public AddUserRequestValidator(AddUserRequest settings)
+        public AddUserCommandValidator(AddUserCommand settings)
         {
             RuleFor(command => command.FirstName)
                 .NotEmpty()

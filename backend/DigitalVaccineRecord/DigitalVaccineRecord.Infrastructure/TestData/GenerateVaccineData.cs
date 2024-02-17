@@ -39,7 +39,7 @@ namespace DigitalVaccineRecord.Infrastructure.TestData
                 ToAge = 4,
                 Number = 1,
                 Vaccine = vaccine,
-                //VaccineId = vaccine.Id
+                VaccineId = vaccine.Id
             });
             return vaccine;
         }        
@@ -62,7 +62,7 @@ namespace DigitalVaccineRecord.Infrastructure.TestData
                 ToAge = ConverMonthToYear(1),
                 Number = 1,
                 Vaccine = vaccine,
-                //VaccineId = vaccine.Id
+                VaccineId = vaccine.Id
             });            
             
             vaccine.Doses.Add(new Dose()
@@ -72,7 +72,7 @@ namespace DigitalVaccineRecord.Infrastructure.TestData
                 ToAge = ConverMonthToYear(2),
                 Number = 2,
                 Vaccine = vaccine,
-                //VaccineId = vaccine.Id
+                VaccineId = vaccine.Id
             });
             
             vaccine.Doses.Add(new Dose()
@@ -82,7 +82,7 @@ namespace DigitalVaccineRecord.Infrastructure.TestData
                 ToAge = ConverMonthToYear(18),
                 Number = 3,
                 Vaccine = vaccine,
-                //VaccineId = vaccine.Id
+                VaccineId = vaccine.Id
             });
             return vaccine;
         }
@@ -105,7 +105,7 @@ namespace DigitalVaccineRecord.Infrastructure.TestData
                 ToAge = ConverMonthToYear(2),
                 Number = 1,
                 Vaccine = vaccine,
-                //VaccineId = vaccine.Id
+                VaccineId = vaccine.Id
             });            
             
             vaccine.Doses.Add(new Dose()
@@ -115,7 +115,7 @@ namespace DigitalVaccineRecord.Infrastructure.TestData
                 ToAge = ConverMonthToYear(4),
                 Number = 2,
                 Vaccine = vaccine,
-                //VaccineId = vaccine.Id
+                VaccineId = vaccine.Id
             });
             
             vaccine.Doses.Add(new Dose()
@@ -125,7 +125,7 @@ namespace DigitalVaccineRecord.Infrastructure.TestData
                 ToAge = ConverMonthToYear(18),
                 Number = 3,
                 Vaccine = vaccine,
-                //VaccineId = vaccine.Id
+                VaccineId = vaccine.Id
             });            
             
             vaccine.Doses.Add(new Dose()
@@ -135,7 +135,7 @@ namespace DigitalVaccineRecord.Infrastructure.TestData
                 ToAge = 6,
                 Number = 4,
                 Vaccine = vaccine,
-                //VaccineId = vaccine.Id
+                VaccineId = vaccine.Id
             });
             return vaccine;
         } 
@@ -158,7 +158,7 @@ namespace DigitalVaccineRecord.Infrastructure.TestData
                 ToAge = ConverMonthToYear(1),
                 Number = 1,
                 Vaccine = vaccine,
-                //VaccineId = vaccine.Id
+                VaccineId = vaccine.Id
             });            
             
             vaccine.Doses.Add(new Dose()
@@ -168,7 +168,7 @@ namespace DigitalVaccineRecord.Infrastructure.TestData
                 ToAge = ConverMonthToYear(2),
                 Number = 2,
                 Vaccine = vaccine,
-                //VaccineId = vaccine.Id
+                VaccineId = vaccine.Id
             });
             
             vaccine.Doses.Add(new Dose()
@@ -178,7 +178,7 @@ namespace DigitalVaccineRecord.Infrastructure.TestData
                 ToAge = ConverMonthToYear(4),
                 Number = 3,
                 Vaccine = vaccine,
-                //VaccineId = vaccine.Id
+                VaccineId = vaccine.Id
             });     
             return vaccine;
         }

@@ -37,7 +37,10 @@ export const Vaccines = () => {
                     <tr>
                         <th scope='row'>1ª dose</th>
                         {data.map(vaccine => (
-                            <td>De: {vaccine.doses.$values[0].fromAge} ate {vaccine.doses.$values[0].toAge} anos</td>
+                            <td>
+                                {vaccine.doses.$values[0]?.number != undefined &&
+                                    `De: ${vaccine.doses.$values[0].fromAge} ate ${vaccine.doses.$values[0].toAge} anos`}
+                            </td>
                         ))}
                     </tr>
                     <tr>
@@ -70,10 +73,10 @@ export const Vaccines = () => {
                     <tr>
                         <th scope='row'>2ª reforço</th>
                         {data.map(vaccine => (
-                             <td>
-                             {vaccine.doses.$values[4]?.number != undefined &&
-                                 `De: ${vaccine.doses.$values[4].fromAge} ate ${vaccine.doses.$values[4].toAge} anos`}
-                         </td>
+                            <td>
+                                {vaccine.doses.$values[4]?.number != undefined &&
+                                    `De: ${vaccine.doses.$values[4].fromAge} ate ${vaccine.doses.$values[4].toAge} anos`}
+                            </td>
                         ))}
                     </tr>
                 </tbody>

@@ -24,6 +24,6 @@ namespace DigitalVaccineRecord.Infrastructure.Entities
         public required EnumGender Gender { get; set; }
         public bool IsPregnant { get; set; }
         public List<EnumProfile> Profiles { get; set; }
-        //public virtual ICollection<UserDose> UserDoses { get; set; }
+        public virtual ICollection<UserDose> UserDoses { get; set; }
     }
 }

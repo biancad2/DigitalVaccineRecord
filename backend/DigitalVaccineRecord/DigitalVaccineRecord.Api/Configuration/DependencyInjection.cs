@@ -10,6 +10,8 @@ namespace DigitalVaccineRecord.Api.Configuration
         {
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IVaccineRepository, VaccineRepository>();
+            services.AddScoped<IUserDoseRepository, UserDoseRepository>();
+            services.AddScoped<IDoseRepository, DoseRepository>();
         } 
         
         public static void AddServices(IServiceCollection services)

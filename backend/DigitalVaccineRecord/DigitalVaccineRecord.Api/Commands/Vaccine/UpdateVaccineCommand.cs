@@ -4,7 +4,7 @@ using MediatR;
 
 namespace DigitalVaccineRecord.Api.Commands.Vaccine
 {
-    public class UpdateVaccineRequest : IRequest<VaccineModel>
+    public class UpdateVaccineCommand : IRequest<VaccineModel>
     {
         public required Guid Id { get; set; }
         public EnumVaccineType Type { get; set; }
@@ -15,7 +15,7 @@ namespace DigitalVaccineRecord.Api.Commands.Vaccine
 
     public static class UpdateVaccineRequestExt
     {
-        public static VaccineModel ConvertRequestToVaccineModel(this UpdateVaccineRequest request)
+        public static VaccineModel ConvertRequestToVaccineModel(this UpdateVaccineCommand request)
         {
             return new VaccineModel()
             {

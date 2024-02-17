@@ -127,7 +127,7 @@ export const UserRegister = () => {
         <Input name="nationalHealthCardNumber" id="nationalHealthCardNumber" placeholder="Exemplo: 00 00000 0000" onChange={handleChanges} maxLength={15} value={user && user.nationalHealthCardNumber} />
       </FormGroup>
       <FormGroup tag="fieldset">
-        <label>Genero <span style={{ color: "red" }}>*</span></label>
+        <label>Gênero <span style={{ color: "red" }}>*</span></label>
         <Row>
           <Col md={4}>
             <FormGroup check>
@@ -166,7 +166,7 @@ export const UserRegister = () => {
         </FormGroup>
       }
       <FormGroup>
-        <Label for="profiles">Selecione os perfis do usuario <span style={{ color: "red" }}>*</span></Label>
+        <Label for="profiles">Selecione os perfis do usuário <span style={{ color: "red" }}>*</span></Label>
         <Input type="select" name="profiles" id="profiles" multiple onChange={onChangeMulti} required value={user && user.profiles.$values}>
           <option value={0} selected={user && user.profiles.$values?.includes(0)}>Paciente</option>
           <option value={1} selected={user && user.profiles.$values?.includes(1)}>Enfermeira</option>
@@ -176,7 +176,7 @@ export const UserRegister = () => {
       <Modal isOpen={isErrorOpen} toggle={toggle}>
         <ModalHeader toggle={toggle}>Erro</ModalHeader>
         <ModalBody>
-          Algo deu errado, por favor, verifique as informacoes e tente novamente.
+          Algo deu errado, por favor, verifique as informações e tente novamente.
         </ModalBody>
         <ModalFooter>
           <Button color="secondary" onClick={toggle}>

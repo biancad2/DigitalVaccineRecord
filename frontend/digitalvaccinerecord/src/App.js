@@ -4,7 +4,6 @@ import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { UserRegister } from './pages/UserRegister';
-import { Home } from './pages/Home';
 import { Users } from './pages/Users';
 import { Vaccines } from './pages/Vaccines';
 import { VaccineRegister } from './pages/VaccineRegister';

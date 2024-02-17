@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
-using DigitalVaccineRecord.Core.Enums;
 using DigitalVaccineRecord.Core.Models;
 using DigitalVaccineRecord.Infrastructure.Context;
 using DigitalVaccineRecord.Infrastructure.Entities;
 using DigitalVaccineRecord.Infrastructure.TestData;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace DigitalVaccineRecord.Infrastructure.Repositories
 {

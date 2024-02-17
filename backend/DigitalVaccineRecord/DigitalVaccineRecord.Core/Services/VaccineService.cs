@@ -23,14 +23,16 @@ namespace DigitalVaccineRecord.Core.Services
             _vaccineRepository.Add(model);
         }
 
-        public void Delete(Guid id)
+        public bool Delete(Guid id)
         {
             _vaccineRepository.Delete(id);
+            return true;
         }
 
-        public void Edit(VaccineModel model)
+        public VaccineModel Edit(VaccineModel model)
         {
             _vaccineRepository.Edit(model);
+            return model;
         }
 
         public VaccineModel Get(Guid id)

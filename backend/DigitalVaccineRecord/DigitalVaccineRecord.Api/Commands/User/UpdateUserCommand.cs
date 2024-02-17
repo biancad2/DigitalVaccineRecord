@@ -17,7 +17,7 @@ namespace DigitalVaccineRecord.Api.Commands.User
         public List<EnumProfile> Profiles { get; set; }
     }
 
-    public static class UpdateUserRequestExt
+    public static class UpdateUserCommandExt
     {
         public static UserModel ConvertRequestToUserModel(this UpdateUserCommand request)
         {

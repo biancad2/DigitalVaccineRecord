@@ -1,42 +1,44 @@
 import React, { useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-import axios from 'axios';
 import { Modal, ModalBody, ModalFooter, ModalHeader, Button } from 'reactstrap';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 import moment from 'moment';
 
 export const Users = () => {
   const baseUrl = process.env.REACT_APP_API_URL_V1 + "/user";
+  
   const [isRemoveOpen, setRemoveModal] = useState(false);
-  const toggle = () => {
-    setRemoveModal(!isRemoveOpen);
-  }
-  const [data, setData] = useState([]);
+  const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState({
     id: '',
     firstName: '',
     surname: '',
   });
+  
+  const toggle = () => {
+    setRemoveModal(!isRemoveOpen);
+  }
 
   const getAll = async () => {
     await axios.get(baseUrl)
       .then(response => {
-        setData(response.data.$values);
+        setUsers(response.data.$values);
       })
       .catch(error => {
         console.log(error);
       })
   }
 
-  const removeUser = async (id) => {
+  const removeUser = async () => {
     await axios.delete(baseUrl + "/" + selectedUser.id)
       .then(response => {
         setRemoveModal(!isRemoveOpen);
-        setData(data.filter(user => user.id != selectedUser.id));
+        setUsers(users.filter(user => user.id != selectedUser.id));
       })
       .catch(error => {
-        console.log(error);
+        
       })
   }
 
@@ -52,7 +54,7 @@ export const Users = () => {
 
   return (
     <div>
-      <h1 className='text-center'>Usuarios</h1>
+      <h1 className='text-center'>Usuários</h1>
       <table className='table table-bordered text-center'>
         <thead>
           <tr>
@@ -60,13 +62,13 @@ export const Users = () => {
             <th>Sobrenome</th>
             <th>Documento</th>
             <th>Data de nascimento</th>
-            <th>Carteira de vacinacao</th>
+            <th>Carteira de vacinação</th>
             <th></th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          {data.map(user => (
+          {users.map(user => (
             <tr key={user.id}>
               <td>{user.firstName}</td>
               <td>{user.surname}</td>

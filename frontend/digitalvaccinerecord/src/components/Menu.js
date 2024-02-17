@@ -21,13 +21,13 @@ function Menu(args) {
 
     return (
         <Navbar fixed={"top"} container={"fluid"} expand={"md"} color={"light"}>
-            <NavbarBrand href="/">Carteira de Vacinacao</NavbarBrand>
+            <NavbarBrand href="/">Carteira de Vacinação</NavbarBrand>
             <NavbarToggler onClick={toggle} />
             <Collapse isOpen={isOpen} navbar>
                 <Nav className="me-auto" navbar>
                     <UncontrolledDropdown nav inNavbar>
                         <DropdownToggle nav caret>
-                            Usuarios
+                            Usuários
                         </DropdownToggle>
                         <DropdownMenu end>
                             <DropdownItem href='/users'>Listar</DropdownItem>

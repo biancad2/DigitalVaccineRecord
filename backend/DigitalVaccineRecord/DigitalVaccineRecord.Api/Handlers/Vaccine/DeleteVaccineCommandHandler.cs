@@ -9,29 +9,18 @@ namespace DigitalVaccineRecord.Api.Handlers.Vaccine
     public class DeleteVaccineCommandHandler : IRequestHandler<DeleteVaccineCommand, bool>
     {
         private readonly IMediator _mediator;
-        private readonly IVaccineService _VaccineService;
+        private readonly IVaccineService _vaccineService;
         public DeleteVaccineCommandHandler(IMediator mediator, IVaccineService service)
         {
             this._mediator = mediator;
-            this._VaccineService = service;
+            this._vaccineService = service;
         }
 
         public async Task<bool> Handle(DeleteVaccineCommand request, CancellationToken cancellationToken)
         {
-            //var Vaccine = request.ConvertRequestToVaccineModel();
-            //try
-            //{
-            _VaccineService.Delete(request.Id);
-
-            //await _mediator.Publish(new VaccineDeletedNotification(Vaccine));
+            _vaccineService.Delete(request.Id);
 
             return await Task.FromResult(true);
-            //}
-            //catch (Exception ex)
-            //{
-            //await _mediator.Publish(new VaccineCreatedNotification(Vaccine));
-            //await _mediator.Publish(new ErroNotification { Excecao = ex.Message, PilhaErro = ex.StackTrace });
-            //return await Task.FromResult("Error");
         }
     }
 }

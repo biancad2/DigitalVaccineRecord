@@ -4,23 +4,19 @@ import { Modal, ModalHeader, ModalBody, Button, Form, FormGroup, Label, Input, F
 import { useNavigate, useParams } from "react-router-dom";
 import moment from 'moment';
 
-function Title({userId}){
-  if(userId != undefined && userId != null)
+function Title({ userId }) {
+  if (userId != undefined && userId != null)
     return <h1 className='text-center'>Editar usuario</h1>;
   return <h1 className='text-center'>Registro de usuario</h1>;
 }
 
 export const UserRegister = () => {
+  const baseUrl = process.env.REACT_APP_API_URL_V1 + "/user";
   let { id } = useParams();
+  const navigate = useNavigate();
 
   const [processing, setProcessing] = useState(false);
-  const baseUrl = process.env.REACT_APP_API_URL_V1 + "/user";
   const [isErrorOpen, setErrorModal] = useState(false);
-  const toggle = () => {
-    setProcessing(!processing);
-    setErrorModal(!isErrorOpen);
-  }
-  const navigate = useNavigate();
 
   const [user, setUser] = useState({
     firstName: '',
@@ -33,6 +29,11 @@ export const UserRegister = () => {
     profiles: ''
   })
 
+  const toggle = () => {
+    setProcessing(!processing);
+    setErrorModal(!isErrorOpen);
+  }
+
   const handleChanges = e => {
     const { target } = e;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -41,7 +42,7 @@ export const UserRegister = () => {
     setUser({
       ...user,
       [name]: value
-    }); 
+    });
   }
 
   const onChangeMulti = e => {
@@ -57,36 +58,39 @@ export const UserRegister = () => {
     setUser({
       ...user,
       [name]: opts
-    }); 
+    });
   }
 
   const getUserDetails = async () => {
     await axios.get(baseUrl + "/" + id)
-        .then(response => {
-          var user = response.data;
-          user.birthDate = moment(user.birthDate).format("YYYY-MM-DD");
-          setUser(response.data);
-        })
-        .catch(error => {
-            console.log(error);
-        })
-}
+      .then(response => {
+        var user = response.data;
+        user.birthDate = moment(user.birthDate).format("YYYY-MM-DD");
+        setUser(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }
 
   useEffect(() => {
     if (id)
       getUserDetails();
   }, [])
 
-  async function submitForm(e) {
+  const submitForm = async (e) => {
     e.preventDefault();
     user.gender = parseInt(user.gender);
     setProcessing(!processing);
     await axios.post(baseUrl, user)
-      .then(response => { navigate("/users"); })
+      .then(response => {
+        navigate("/users");
+      })
       .catch(error => {
         setErrorModal(!isErrorOpen);
       })
   }
+
   return (
     <Form onSubmit={(e) => submitForm(e)} className='card border-light p-4'>
       <Title userId={id} />
@@ -100,7 +104,7 @@ export const UserRegister = () => {
         <Col md={6}>
           <FormGroup >
             <Label for="surname">Sobrenome <span style={{ color: "red" }}>*</span></Label>
-            <Input name="surname" id="surname" placeholder="Digite seu sobrenome" onChange={handleChanges} maxLength={50} required value={user && user.surname}  />
+            <Input name="surname" id="surname" placeholder="Digite seu sobrenome" onChange={handleChanges} maxLength={50} required value={user && user.surname} />
           </FormGroup>
         </Col>
       </Row>
@@ -144,7 +148,7 @@ export const UserRegister = () => {
           <Col md={4}>
             <FormGroup check>
               <Label check>
-                <Input type="radio" name="gender" value={2} onChange={handleChanges} required checked={user && user.gender == 2}/>{' '}
+                <Input type="radio" name="gender" value={2} onChange={handleChanges} required checked={user && user.gender == 2} />{' '}
                 Masculino
               </Label>
             </FormGroup>
@@ -155,7 +159,7 @@ export const UserRegister = () => {
         <FormGroup tag="fieldset">
           <FormGroup check>
             <Label check>
-              <Input type="checkbox" name="isPregnant" onChange={handleChanges} checked={user && user.isPregnant}/>{' '}
+              <Input type="checkbox" name="isPregnant" onChange={handleChanges} checked={user && user.isPregnant} />{' '}
               Marque se for gestante
             </Label>
           </FormGroup>

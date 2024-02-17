@@ -18,20 +18,9 @@ namespace DigitalVaccineRecord.Api.Handlers.User
 
         public async Task<bool> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
-            //var user = request.ConvertRequestToUserModel();
-            //try
-            //{
             _userService.Delete(request.Id);
 
-            //await _mediator.Publish(new UserDeletedNotification(user));
-
             return await Task.FromResult(true);
-            //}
-            //catch (Exception ex)
-            //{
-            //await _mediator.Publish(new UserCreatedNotification(user));
-            //await _mediator.Publish(new ErroNotification { Excecao = ex.Message, PilhaErro = ex.StackTrace });
-            //return await Task.FromResult("Error");
         }
     }
 }

@@ -1,10 +1,11 @@
 import axios from 'axios';
-import React, { useState, useRef } from 'react';
-import { Button, Form, FormGroup, Label, Input, FormText, Row, Col, Card, CardHeader, CardBody } from 'reactstrap';
+import React, { useState } from 'react';
+import { Button, Form, FormGroup, Label, Input, Row, Col, Card, CardHeader, CardBody } from 'reactstrap';
 import { useNavigate } from "react-router-dom";
 
 export const VaccineRegister = () => {
     const baseUrl = process.env.REACT_APP_API_URL_V1 + "/vaccine";
+
     const navigate = useNavigate();
 
     const [vaccine, setVaccine] = useState({
@@ -19,7 +20,6 @@ export const VaccineRegister = () => {
         const { target } = e;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const { name } = target;
-        debugger
         if (index >= 0) {
             if (vaccine.doses[index]) {
                 vaccine.doses[index][name] = value;
@@ -27,12 +27,12 @@ export const VaccineRegister = () => {
                 var dose = { [name]: value };
                 vaccine.doses.push(dose);
             }
-        } else {
-            setVaccine({
-                ...vaccine,
-                [name]: value
-            });
         }
+        setVaccine({
+            ...vaccine,
+            [name]: value
+        });
+
     }
 
     async function submitForm(e) {
@@ -43,10 +43,12 @@ export const VaccineRegister = () => {
             vaccine.doses[i].toAge = parseInt(vaccine.doses[i].toAge);
             vaccine.doses[i].number = i + 1;
         }
+        
         await axios.post(baseUrl, vaccine)
             .then(response => { navigate("/vaccines"); })
-            .catch(error => { console.log(error) })
+            .catch(error => {  })
     }
+
     return (
         <Form className='card border-light p-4' onSubmit={(e) => submitForm(e)}>
             <legend className='text-center mb-5'>Registro de novas vacinas</legend>
@@ -81,13 +83,13 @@ export const VaccineRegister = () => {
                 </Col>
             </Row>
             <FormGroup>
-                <Label for="description">Descricao</Label>
+                <Label for="description">Descrição</Label>
                 <Input name="description" id="description" placeholder="Exemplo: Vacina indicada para..." onChange={(e) => handleChange(e, undefined)} />
             </FormGroup>
             <Row>
                 <Col md={6} >
-                    <Card>
-                        <CardHeader className="text-center">1 dose</CardHeader>
+                    <Card className='mb-4'>
+                        <CardHeader className="text-center">1ª dose (faixa etária em anos)</CardHeader>
                         <CardBody>
                             <FormGroup >
                                 <Label for="fromAge">
@@ -97,7 +99,7 @@ export const VaccineRegister = () => {
                             </FormGroup>
                             <FormGroup>
                                 <Label for="toAge">
-                                    Ate:
+                                    Até:
                                 </Label>
                                 <Input name="toAge" id="toAge" placeholder="0" onChange={(e) => handleChange(e, 0)} />
                             </FormGroup>
@@ -105,26 +107,100 @@ export const VaccineRegister = () => {
                     </Card>
                 </Col>
                 <Col md={6} >
-                    <Card>
-                        <CardHeader className="text-center">2 dose</CardHeader>
-                        <CardBody>
-                            <FormGroup >
-                                <Label for="fromAge">
-                                    De:
-                                </Label>
-                                <Input name="fromAge" id="fromAge" placeholder="0" onChange={(e) => handleChange(e, 1)} />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label for="toAge">
-                                    Ate:
-                                </Label>
-                                <Input name="toAge" id="toAge" placeholder="0" onChange={(e) => handleChange(e, 1)} />
-                            </FormGroup>
-                        </CardBody>
-                    </Card>
+                    {vaccine.doses[0] != undefined
+                        && vaccine.doses[0].fromAge != undefined
+                        && vaccine.doses[0].toAge != undefined
+                        && <Card className='mb-4'>
+                            <CardHeader className="text-center">2ª dose (faixa etária em anos)</CardHeader>
+                            <CardBody>
+                                <FormGroup >
+                                    <Label for="fromAge">
+                                        De:
+                                    </Label>
+                                    <Input name="fromAge" id="fromAge" placeholder="0" onChange={(e) => handleChange(e, 1)} />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="toAge">
+                                        Até:
+                                    </Label>
+                                    <Input name="toAge" id="toAge" placeholder="0" onChange={(e) => handleChange(e, 1)} />
+                                </FormGroup>
+                            </CardBody>
+                        </Card>}
+                </Col>
+                <Col md={6} >
+                    {vaccine.doses[1] != undefined
+                        && vaccine.doses[1].fromAge != undefined
+                        && vaccine.doses[1].toAge != undefined
+                        &&
+                        <Card className='mb-4'>
+                            <CardHeader className="text-center">3ª dose (faixa etária em anos)</CardHeader>
+                            <CardBody>
+                                <FormGroup >
+                                    <Label for="fromAge">
+                                        De:
+                                    </Label>
+                                    <Input name="fromAge" id="fromAge" placeholder="0" onChange={(e) => handleChange(e, 2)} />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="toAge">
+                                        Até:
+                                    </Label>
+                                    <Input name="toAge" id="toAge" placeholder="0" onChange={(e) => handleChange(e, 2)} />
+                                </FormGroup>
+                            </CardBody>
+                        </Card>}
                 </Col>
             </Row>
-            <Button>Salvar</Button>
+            <Row>
+                <Col md={6} >
+                    {vaccine.doses[2] != undefined
+                        && vaccine.doses[2].fromAge != undefined
+                        && vaccine.doses[2].toAge != undefined
+                        &&
+                        <Card className='mb-4'>
+                            <CardHeader className="text-center">1ª dose de reforço (faixa etária em anos)</CardHeader>
+                            <CardBody>
+                                <FormGroup >
+                                    <Label for="fromAge">
+                                        De:
+                                    </Label>
+                                    <Input name="fromAge" id="fromAge" placeholder="0" onChange={(e) => handleChange(e, 3)} />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="toAge">
+                                        Até:
+                                    </Label>
+                                    <Input name="toAge" id="toAge" placeholder="0" onChange={(e) => handleChange(e, 3)} />
+                                </FormGroup>
+                            </CardBody>
+                        </Card>}
+                </Col>
+                <Col md={6} >
+                    {vaccine.doses[3] != undefined
+                        && vaccine.doses[3].fromAge != undefined
+                        && vaccine.doses[3].toAge != undefined
+                        &&
+                        <Card className='mb-4'>
+                            <CardHeader className="text-center">2ª dose de reforço (faixa etária em anos)</CardHeader>
+                            <CardBody>
+                                <FormGroup >
+                                    <Label for="fromAge">
+                                        De:
+                                    </Label>
+                                    <Input name="fromAge" id="fromAge" placeholder="0" onChange={(e) => handleChange(e, 4)} />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="toAge">
+                                        Até:
+                                    </Label>
+                                    <Input name="toAge" id="toAge" placeholder="0" onChange={(e) => handleChange(e, 4)} />
+                                </FormGroup>
+                            </CardBody>
+                        </Card>}
+                </Col>
+            </Row>
+            <Button color='success'>Salvar</Button>
         </Form>
     );
 }

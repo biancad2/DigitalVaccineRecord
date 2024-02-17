@@ -18,20 +18,10 @@ namespace DigitalVaccineRecord.Api.Handlers.Vaccine
 
         public async Task<VaccineModel> Handle(UpdateVaccineCommand request, CancellationToken cancellationToken)
         {
-            var Vaccine = request.ConvertRequestToVaccineModel();
-            //try
-            //{
-            _VaccineService.Edit(Vaccine);
+            var vaccine = request.ConvertRequestToVaccineModel();
+            _VaccineService.Edit(vaccine);
 
-            //await _mediator.Publish(new VaccineUpdatedNotification(Vaccine));
-
-            return await Task.FromResult(Vaccine);
-            //}
-            //catch (Exception ex)
-            //{
-            //await _mediator.Publish(new VaccineCreatedNotification(Vaccine));
-            //await _mediator.Publish(new ErroNotification { Excecao = ex.Message, PilhaErro = ex.StackTrace });
-            //return await Task.FromResult("Error");
+            return await Task.FromResult(vaccine);
         }
     }
 }

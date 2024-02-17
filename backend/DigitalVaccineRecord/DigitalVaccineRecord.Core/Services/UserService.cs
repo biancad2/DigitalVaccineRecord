@@ -28,14 +28,16 @@ namespace DigitalVaccineRecord.Core.Services
             _userRepository.Add(model);
         }
 
-        public void Delete(Guid id)
+        public bool Delete(Guid id)
         {
             _userRepository.Delete(id);
+            return true;
         }
 
-        public void Edit(UserModel model)
+        public UserModel Edit(UserModel model)
         {
             _userRepository.Edit(model);
+            return model;
         }
 
         public UserModel Get(Guid id)

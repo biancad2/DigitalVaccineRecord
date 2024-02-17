@@ -12,12 +12,10 @@ namespace DigitalVaccineRecord.Api.Controllers
     public class UserController : Controller
     {
         private readonly IMediator _mediator;
-        private readonly IUserService _userService;
 
-        public UserController(IMediator mediator/*, IUserService userService*/)
+        public UserController(IMediator mediator)
         {
             this._mediator = mediator;
-            //this._userService = userService;
         }
 
         [HttpGet]
@@ -30,6 +28,8 @@ namespace DigitalVaccineRecord.Api.Controllers
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Get(Guid id)
         {
             var request = new GetUserCommand() { Id = id };
@@ -47,6 +47,8 @@ namespace DigitalVaccineRecord.Api.Controllers
         }
 
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Put([FromQuery] UpdateUserCommand request)
         {
             var response = await _mediator.Send(request);
@@ -54,6 +56,8 @@ namespace DigitalVaccineRecord.Api.Controllers
         }
 
         [HttpPost("dose")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AddDose([FromBody] AddUserDoseCommand request)
         {
             var response = await _mediator.Send(request);
@@ -61,6 +65,8 @@ namespace DigitalVaccineRecord.Api.Controllers
         }
 
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Delete(Guid id)
         {
             var request = new DeleteUserCommand() { Id = id };

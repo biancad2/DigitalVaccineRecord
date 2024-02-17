@@ -19,19 +19,11 @@ namespace DigitalVaccineRecord.Api.Handlers.User
         public async Task<UserModel> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
             var user = request.ConvertRequestToUserModel();
-            //try
-            //{
             _userService.Edit(user);
 
             await _mediator.Publish(new UserUpdatedNotification(user));
 
             return await Task.FromResult(user);
-            //}
-            //catch (Exception ex)
-            //{
-            //await _mediator.Publish(new UserCreatedNotification(user));
-            //await _mediator.Publish(new ErroNotification { Excecao = ex.Message, PilhaErro = ex.StackTrace });
-            //return await Task.FromResult("Error");
         }
     }
 }

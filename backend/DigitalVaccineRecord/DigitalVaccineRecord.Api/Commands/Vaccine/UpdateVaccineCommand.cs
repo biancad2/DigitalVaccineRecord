@@ -1,4 +1,5 @@
-﻿using DigitalVaccineRecord.Core.Enums;
+﻿using DigitalVaccineRecord.Api.Commands.Doses;
+using DigitalVaccineRecord.Core.Enums;
 using DigitalVaccineRecord.Core.Models;
 using MediatR;
 
@@ -10,7 +11,7 @@ namespace DigitalVaccineRecord.Api.Commands.Vaccine
         public EnumVaccineType Type { get; set; }
         public required string Name { get; set; }
         public required string Description { get; set; }
-        public required List<DoseModel> Doses { get; set; }
+        public required List<UpdateDoseCommand> Doses { get; set; }
     }
 
     public static class UpdateVaccineRequestExt
@@ -23,7 +24,7 @@ namespace DigitalVaccineRecord.Api.Commands.Vaccine
                 Description = request.Description,
                 Type = request.Type,
                 Name = request.Name,
-                Doses = request.Doses
+                Doses = request.Doses.Select(d => d.ConvertRequestToDoseModel()).ToList()
             };
         }
     }

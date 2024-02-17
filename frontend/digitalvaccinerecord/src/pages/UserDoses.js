@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-import axios from 'axios';
+import { useParams } from 'react-router-dom'
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import { BrowserRouter as Router, Routes, Route, Link, useParams } from 'react-router-dom'
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 import moment from 'moment';
 
 function Dose({ vaccine, userData, index, openAndCloseModal }) {
@@ -16,6 +16,7 @@ function Dose({ vaccine, userData, index, openAndCloseModal }) {
             {`Enfermeira: ${dose.nurseSignature}`}
         </td>;
     }
+
     var currentDose = vaccine.vaccine.doses.$values[index];
 
     if (currentDose !== undefined && currentDose !== null) {
@@ -40,7 +41,7 @@ export const Records = () => {
         doseId: ''
     });
     const [includeModal, setIncludeModal] = useState(false);
-    const [filter, setFilter] = useState(0);
+    
     const toggle = () => {
         setIncludeModal(!includeModal);}
 
@@ -70,8 +71,9 @@ export const Records = () => {
         });
     }
 
-    async function submitDose(e) {
+    const submitDose = async (e) => {
         e.preventDefault();
+        
         userDoseData.userId = userData.id;
         await axios.post(baseUrl + "/user/dose", userDoseData)
             .then(response => {

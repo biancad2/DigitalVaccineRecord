@@ -9,28 +9,19 @@ namespace DigitalVaccineRecord.Api.Handlers.Vaccine
     public class GetVaccineCommandHandler : IRequestHandler<GetVaccineCommand, VaccineModel>
     {
         private readonly IMediator _mediator;
-        private readonly IVaccineService _VaccineService;
+        private readonly IVaccineService _vaccineService;
         public GetVaccineCommandHandler(IMediator mediator, IVaccineService service)
         {
             this._mediator = mediator;
-            this._VaccineService = service;
+            this._vaccineService = service;
         }
 
         public async Task<VaccineModel> Handle(GetVaccineCommand request, CancellationToken cancellationToken)
         {
-            //try
-            //{
-            var Vaccine = _VaccineService.Get(request.Id);
+            var vaccine = _vaccineService.Get(request.Id);
 
-            //await _mediator.Publish(new VaccineCreatedNotification(Vaccine));
 
-            return await Task.FromResult(Vaccine);
-            //}
-            //catch (Exception ex)
-            //{
-            //await _mediator.Publish(new VaccineCreatedNotification(Vaccine));
-            //await _mediator.Publish(new ErroNotification { Excecao = ex.Message, PilhaErro = ex.StackTrace });
-            //return await Task.FromResult("Error");
+            return await Task.FromResult(vaccine);
         }
     }
 }

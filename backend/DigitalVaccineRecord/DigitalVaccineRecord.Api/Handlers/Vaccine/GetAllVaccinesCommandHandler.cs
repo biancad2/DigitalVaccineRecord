@@ -18,19 +18,9 @@ namespace DigitalVaccineRecord.Api.Handlers.Vaccine
 
         public async Task<List<VaccineModel>> Handle(GetAllVaccinesCommand request, CancellationToken cancellationToken)
         {
-            //try
-            //{
             var vaccines = await _VaccineService.GetAllAsync();
 
-            //await _mediator.Publish(new VaccineUpdatedNotification(Vaccine));
-
             return vaccines;
-            //}
-            //catch (Exception ex)
-            //{
-            //await _mediator.Publish(new VaccineCreatedNotification(Vaccine));
-            //await _mediator.Publish(new ErroNotification { Excecao = ex.Message, PilhaErro = ex.StackTrace });
-            //return await Task.FromResult("Error");
         }
     }
 }

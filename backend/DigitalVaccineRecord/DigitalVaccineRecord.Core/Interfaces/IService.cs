@@ -14,8 +14,8 @@ namespace DigitalVaccineRecord.Core.Interfaces
 
         void Add(T item);
 
-        void Edit(T item);
+        T Edit(T item);
 
-        void Delete(Guid id);
+        bool Delete(Guid id);
     }
 }

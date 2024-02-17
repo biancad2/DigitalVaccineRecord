@@ -12,10 +12,11 @@ namespace DigitalVaccineRecord.Infrastructure.TestData
     {
         internal static IEnumerable<User> GenerateListOfUsers()
         {
-            var list = new List<User>();  
-
-            list.Add(GeneratePatient());
-            list.Add(GenerateNurse());
+            var list = new List<User>
+            {
+                GeneratePatient(),
+                GenerateNurse()
+            };  
             return list;
         }
         internal static User GeneratePatient()

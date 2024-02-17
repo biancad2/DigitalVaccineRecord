@@ -20,11 +20,11 @@ namespace DigitalVaccineRecord.Api.Handlers.User
         {
             //try
             //{
-            var users = _userService.GetAll();
+            var users = await _userService.GetAllAsync();
 
             //await _mediator.Publish(new UserUpdatedNotification(user));
 
-            return await Task.FromResult(users);
+            return users;
             //}
             //catch (Exception ex)
             //{

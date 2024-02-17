@@ -8,22 +8,9 @@ using System.Data.Entity.Validation;
 
 namespace DigitalVaccineRecord.Infrastructure.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : BaseRepository, IUserRepository
     {
-        private readonly AppDbContext _dbContext;
-        private readonly IMapper _mapper;
-
-        public UserRepository(AppDbContext dbContext)
-        {
-            _dbContext = dbContext;
-
-            var configuration = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<User, UserModel>();
-                cfg.CreateMap<UserModel, User>();
-            });
-            _mapper = configuration.CreateMapper();
-        }
+        public UserRepository(AppDbContext dbContext):base(dbContext) { }
 
         public UserModel Get(Guid id)
         {
@@ -61,7 +48,7 @@ namespace DigitalVaccineRecord.Infrastructure.Repositories
             return _mapper.Map<IEnumerable<UserModel>>(_dbContext.Users);
         }
 
-        public IEnumerable<UserModel> GetAll()
+        public async Task<IEnumerable<UserModel>> GetAllAsync()
         {
             return _mapper.Map<IEnumerable<UserModel>>(_dbContext.Users.ToList());
         }

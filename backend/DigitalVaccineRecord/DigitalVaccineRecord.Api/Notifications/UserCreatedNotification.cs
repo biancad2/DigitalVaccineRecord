@@ -15,7 +15,7 @@ namespace DigitalVaccineRecord.Api.Notifications
             NationalHealthCardNumber = model.NationalHealthCardNumber;
             Gender  = model.Gender;
             IsPregnant = model.IsPregnant;
-            Profiles = model.Profiles;
+            Profiles = model.Profiles.ToList();
         }    
         public Guid Id { get; set; }
         public String FirstName { get; set; }

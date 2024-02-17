@@ -23,9 +23,10 @@ namespace DigitalVaccineRecord.Api.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Get([FromQuery] GetAllUserRequest request)
+        public async Task<IActionResult> Get([FromQuery] GetAllUserRequest request)
         {
-            return Ok(_mediator.Send(request));
+            var response = await _mediator.Send(request);
+            return Ok(response);
         }
 
         [HttpGet("{id}")]
@@ -37,12 +38,12 @@ namespace DigitalVaccineRecord.Api.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Post([FromQuery] AddUserRequest request)
+        public async Task<IActionResult> Post([FromBody]AddUserRequest request)
         {
-            var response = await _mediator.Send(request);
-            return Ok(response);
+            await _mediator.Send(request);
+            return Created();
         }
 
         [HttpPut]

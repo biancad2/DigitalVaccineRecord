@@ -8,7 +8,7 @@ namespace DigitalVaccineRecord.Core.Interfaces
 {
     public interface IService<T>
     {
-        List<T> GetAll();
+        Task<List<T>> GetAllAsync();
 
         T Get(Guid id);
 

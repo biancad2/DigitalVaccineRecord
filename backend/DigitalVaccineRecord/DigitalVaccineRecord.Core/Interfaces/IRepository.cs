@@ -8,7 +8,7 @@ namespace DigitalVaccineRecord.Core.Interfaces
 {
     public interface IRepository<T>
     {
-        IEnumerable<T> GetAll();
+        Task<IEnumerable<T>> GetAllAsync();
 
         T Get(Guid id);
 

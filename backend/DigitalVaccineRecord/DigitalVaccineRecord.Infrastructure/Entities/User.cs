@@ -23,7 +23,7 @@ namespace DigitalVaccineRecord.Infrastructure.Entities
         public required String NationalHealthCardNumber { get; set; }
         public required EnumGender Gender { get; set; }
         public bool IsPregnant { get; set; }
-        //public IEnumerable<int> Profiles { get; set; }
         public List<EnumProfile> Profiles { get; set; }
+        //public virtual ICollection<UserDose> UserDoses { get; set; }
     }
 }

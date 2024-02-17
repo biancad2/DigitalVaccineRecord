@@ -38,9 +38,10 @@ namespace DigitalVaccineRecord.Core.Services
             return _userRepository.Get(id);
         }
 
-        public List<UserModel> GetAll()
+        public async Task<List<UserModel>> GetAllAsync()
         {
-            return _userRepository.GetAll().ToList();
+            var users = await _userRepository.GetAllAsync();
+            return users.ToList();
         }
 
 

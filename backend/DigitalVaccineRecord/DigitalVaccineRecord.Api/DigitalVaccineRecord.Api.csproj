@@ -14,10 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\DigitalVaccineRecord.Core\DigitalVaccineRecord.Core.csproj" />
     <ProjectReference Include="..\DigitalVaccineRecord.Infrastructure\DigitalVaccineRecord.Infrastructure.csproj" />
   </ItemGroup>
